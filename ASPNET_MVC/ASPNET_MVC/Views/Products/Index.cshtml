@@ -1,62 +1,47 @@
-﻿
-@model ASPNET_MVC.Views.Products.IndexModel
+﻿@model IEnumerable<ASPNET_MVC.Models.Product>
 
 @{
-    ViewData["Title"] = "Product list";
+    ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Create">Create New</a>
-    <!--<a asp-page="/Views/Products/Create">Create New</a> -->
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Description)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Price)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Name)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-    @if(Model == null){
-        <span>no items found</span>
-    }
-    else
-    {
-
-        @foreach (var item in Model.Product)
-         {
-             <tr>
-                 <td>
-                     @Html.DisplayFor(modelItem => item.Description)
-                 </td>
-                 <td>
-                     @Html.DisplayFor(modelItem => item.Price)
-                 </td>
-                 <td>
-                     @Html.DisplayFor(modelItem => item.Name)
-                 </td>
-                 <td>
-                     <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Edit">Edit</a>
-                     <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Details">Details</a>
-                     <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Delete">Delete</a>
-
-                     <!--
-                      <a asp-page="/Views/Products/Edit" asp-route-id="@item.Id">Edit</a> |
-                      <a asp-page="/Views/Products/Details" asp-route-id="@item.Id">Details</a> |
-                      <a asp-page="/Views/Products/Delete" asp-route-id="@item.Id">Delete</a> -->
-                 </td>
-             </tr>
-         }
-    }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

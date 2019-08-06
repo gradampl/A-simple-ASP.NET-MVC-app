@@ -1,5 +1,4 @@
-﻿@page
-@model ASPNET_MVC.Views.Products.DeleteModel
+﻿@model ASPNET_MVC.Models.Product
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,29 +11,29 @@
     <h4>Product</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Description)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Description)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Price)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Name)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Name)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
     
-    <form method="post">
-        <input type="hidden" asp-for="Product.Id" />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <a asp-action="Index">Back to List</a>
     </form>
 </div>
