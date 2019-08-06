@@ -1,5 +1,4 @@
-﻿@page
-@model ASPNET_MVC.Views.Products.CreateModel
+﻿@model ASPNET_MVC.Views.Products.CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -36,7 +35,8 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <!--<a asp-page="/Views/Products/Index">Back to List</a>-->
+    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
