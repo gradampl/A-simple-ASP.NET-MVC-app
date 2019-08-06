@@ -13,6 +13,7 @@ namespace ASPNET_MVC.Models
         {
         }
 
-        public DbSet<ASPNET_MVC.Models.Product> Product { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Category> Category { get; set; }
     }
 }
