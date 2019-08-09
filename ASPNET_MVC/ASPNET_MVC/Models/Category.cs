@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASPNET_MVC.Models
 {
-    public class Category : BaseModel
+    public partial class Category : BaseModel
     {
-        public ICollection<Product> Products { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int CategoryId { get; set; }
+        
+        public Category()
+        {
+            this.Products=new HashSet<Product>();
+        }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

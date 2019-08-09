@@ -1,11 +1,20 @@
-﻿namespace ASPNET_MVC.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace ASPNET_MVC.Models
 {
-    public class Product : BaseModel
+    public partial class Product : BaseModel
     {
+        public int Id { get; set; }
+
+        [Required(ErrorMessage ="This field is required.")]
         public string Description { get; set; }
 
         public decimal? Price { get; set; }
 
-        public Category Category { get; set; }
+        [Required]
+        public virtual Category Category { get; set; }
+
+        public int CategoryId { get; set; }
     }
 }
