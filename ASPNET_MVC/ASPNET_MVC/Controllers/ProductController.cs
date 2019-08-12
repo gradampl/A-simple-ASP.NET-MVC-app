@@ -77,10 +77,6 @@ namespace ASPNET_MVC.Controllers
 
             return RedirectToAction("Index", "Product", _context.Category.Find(model.EditableProduct.CategoryId));
 
-            bool ProductExists(int id)
-            {
-                return _context.Product.Any(e => e.Id == id);
-            }
         }
 
 
@@ -104,26 +100,21 @@ namespace ASPNET_MVC.Controllers
             Product product;
 
             if (model.EditableProduct.Id > 0)
-                
-            try
                 {
                     product = _context.Product.Find(model.EditableProduct.Id);
+
+                    int _categoryId = product.CategoryId;
 
                     _context.Product.Remove(product);
 
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index","Product", product.CategoryId);
+                    return RedirectToAction("Index", new { categoryid = _categoryId});
                 }
 
-            catch
                 {
                     return View(model);
                 }
-            else
-            {
-                return View(model);
-            }
         }
     }
 }

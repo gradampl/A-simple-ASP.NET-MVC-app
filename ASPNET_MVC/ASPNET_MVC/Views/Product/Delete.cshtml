@@ -11,6 +11,9 @@
 <div>
     <h4>Product</h4>
     <hr />
+    
+    @{ var categoryId = Model.EditableProduct.CategoryId;}
+
     <dl class="row">
         <dt class="col-sm-2">
             Nazwa
@@ -40,8 +43,8 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="@Model.EditableProduct.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        <a href="@Url.Action("Index","ProductCategory",new{categoryId = Model.EditableProduct.CategoryId})" class="btn btn-default">Powrót do listy</a>
-        <a asp-action="Index" asp-route-id="@Model.EditableProduct.CategoryId">Back to List</a>
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+        <a href="@Url.Action("Index","Product",new{categoryId = categoryId})" class="btn btn-default">Powrót do listy</a>
+        <a asp-action="Index" asp-route-id="@categoryId">Back to List</a>
     </form>
 </div>
