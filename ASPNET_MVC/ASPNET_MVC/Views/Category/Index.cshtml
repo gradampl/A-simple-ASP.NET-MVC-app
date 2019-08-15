@@ -1,5 +1,5 @@
 ﻿@using Microsoft.EntityFrameworkCore
-@model ASPNET_MVC.ViewModels.CategoryViewModel
+@model List<ASPNET_MVC.ViewModels.CategoryViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -10,12 +10,14 @@
     
     <h2>Category List</h2>
     <ul>
-        @foreach (var item in Model.Categories)
+        @foreach (var item in Model)
 
         {
-          <li>
-                <a href="@Url.Action("Index","Product",new{categoryId = item.CategoryId})" class="btn btn-default" >@item.Name</a>
-          </li>
+            <li>
+                @item.Name    
+                @*<a href="@Url.Action("Index","Product",new{categoryId = item.Id})" class="btn btn-default" >@item.Name</a>*@
+                <a asp-action="Index" asp-route-id="@item.Id" , asp-controller="ProductCategory" , class="btn btn-primary">Zobacz produkty</a>
+            </li>
         }
     </ul>
 </div>

@@ -9,28 +9,28 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="@Model.EditableProduct.Id" />
+            <input type="hidden" asp-for="@Model.Id" />
             <div class="form-group">
-                <label asp-for="@Model.EditableProduct.Name" class="control-label"></label>
-                <input asp-for="@Model.EditableProduct.Name" class="form-control" />
-                <span asp-validation-for="@Model.EditableProduct.Name" class="text-danger"></span>
+                <label asp-for="@Model.Name" class="control-label"></label>
+                <input asp-for="@Model.Name" class="form-control" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.EditableProduct.Description" class="control-label"></label>
-                <input asp-for="@Model.EditableProduct.Description" class="form-control" />
-                <span asp-validation-for="@Model.EditableProduct.Description" class="text-danger"></span>
+                <label asp-for="@Model.Description" class="control-label"></label>
+                <input asp-for="@Model.Description" class="form-control" />
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.EditableProduct.Category.Name" class="control-label"></label>
+                <label asp-for="@Model.Category.Name" class="control-label"></label>
                 @*<select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>*@
-                @Html.DropDownListFor(x => x.EditableProduct.CategoryId, Model.Categories)
+                @Html.DropDownListFor(x => x.CategoryId, Model.Categories)
                 @*<label asp-for="CategoryId" class="control-label"></label>
         <span asp-validation-for="CategoryId" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label asp-for="@Model.EditableProduct.Price" class="control-label"></label>
-                <input asp-for="@Model.EditableProduct.Price" class="form-control" />
-                <span asp-validation-for="@Model.EditableProduct.Price" class="text-danger"></span>
+                <label asp-for="@Model.Price" class="control-label"></label>
+                <input asp-for="@Model.Price" class="form-control" />
+                <span asp-validation-for="@Model.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -40,7 +40,7 @@
 </div>
 
 <div>
-    <a href="@Url.Action("Index","ProductCategory",new{categoryId = Model.EditableProduct.CategoryId})" class="btn btn-default">Powrót do listy</a>
+    <a href="@Url.Action("Index","ProductCategory",new{categoryId = Model.CategoryId})" class="btn btn-default">Powrót do listy</a>
     @*<a href="@Url.Action("ProductsIndex","Products",new{categoryId = Model.EditableProduct.CategoryId})" class="btn btn-default">Powrót do listy</a>*@
     
 </div>

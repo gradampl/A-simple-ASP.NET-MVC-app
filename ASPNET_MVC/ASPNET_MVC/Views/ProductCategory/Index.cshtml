@@ -1,0 +1,49 @@
+﻿@model ASPNET_MVC.ViewModels.ProductCategoryVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "_Layout";
+}
+
+<h3>Index</h3>
+
+<p>
+    @*<a href="@Url.Action("Edit","Product",new{})" class="btn btn-success">Dodaj nowy</a>*@
+    <a asp-action="Edit" , asp-controller="Product" ,class="btn btn-success">Dodaj nowy</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Cena</th>
+            <th>Kategoria</th>
+            <th></th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id", asp-controller="Product" , class="btn btn-primary">Edytuj</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id", asp-controller="Product" , class="btn btn-danger">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

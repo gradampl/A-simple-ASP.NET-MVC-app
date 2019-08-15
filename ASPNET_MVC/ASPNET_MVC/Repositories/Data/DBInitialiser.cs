@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNET_MVC.Models;
+using ASPNET_MVC.Services;
 
 namespace ASPNET_MVC.Models
 
@@ -28,7 +29,7 @@ namespace ASPNET_MVC.Models
                         new Product {Description = "niepasteryzowane, swieze", Name = "mleko",CategoryId = 1}
                     },
 
-                    CategoryId = 1
+                    Id = 1
                 },
 
 
@@ -40,7 +41,30 @@ namespace ASPNET_MVC.Models
                         new Product {Description = "kompaktowa, ladowana od gory", Name = "pralka",CategoryId = 2}
                     },
 
-                    CategoryId = 2
+                    Id = 2
+                },
+
+
+
+                new Category {Name = "Zabawki", Products = new Product[]
+                    {
+                       new Product {Description = "pluszowy, jasnobrazowy", Name = "miś",CategoryId = 3},
+                       new Product {Description = "składany", Name = "samochodzik",CategoryId = 3},
+                       new Product {Description = "na baterie", Name = "robot",CategoryId = 3}
+                    },
+
+                    Id = 3
+                },
+
+
+                new Category {Name = "Dywany", Products = new Product[]
+                {
+                    new Product {Description = "perski", Name = "Sapir",CategoryId = 4},
+                    new Product {Description = "turecki", Name = "Mehmed",CategoryId = 4},
+                    new Product {Description = "amerykański", Name = "Joe",CategoryId = 4}
+                },
+
+                Id = 4
                 }
 
             };

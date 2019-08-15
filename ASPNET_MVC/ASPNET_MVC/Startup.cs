@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using ASPNET_MVC.Models;
+using ASPNET_MVC.Repositories;
+using ASPNET_MVC.Services;
 
 namespace ASPNET_MVC
 {
@@ -38,6 +40,9 @@ namespace ASPNET_MVC
 
             services.AddDbContext<ASPNET_MVCContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ASPNET_MVCContext")));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

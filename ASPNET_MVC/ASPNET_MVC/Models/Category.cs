@@ -8,8 +8,8 @@ namespace ASPNET_MVC.Models
 {
     public partial class Category : BaseModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CategoryId { get; set; }
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
+        //public int Id { get; set; }
         
         public Category()
         {
