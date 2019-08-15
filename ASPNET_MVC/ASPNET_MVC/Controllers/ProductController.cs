@@ -7,8 +7,10 @@ using ASPNET_MVC.Models;
 using ASPNET_MVC.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.DataAnnotations.Internal;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.ExpressionTranslators.Internal;
 
 namespace ASPNET_MVC.Controllers
 {
@@ -58,27 +60,45 @@ namespace ASPNET_MVC.Controllers
             Product product;
 
             if (model.EditableProduct.Id > 0)
+            {
                 product = _context.Product.Find(model.EditableProduct.Id);
+                int catID = model.EditableProduct.CategoryId;
 
+            }
+                
             else
             {
                 product = new Product();
                 _context.Product.Add(product);
             }
 
-            product.CategoryId = model.EditableProduct.CategoryId;
+            string price = model.EditableProduct.Price.ToString();
 
-            product.Name = model.EditableProduct.Name;
+            decimal myDec;
 
-            product.Description = model.EditableProduct.Description;
+            bool IsNumeric = decimal.TryParse(price, out myDec);
 
-            product.Price = model.EditableProduct.Price;
 
-            // add try/catch 
-            _context.SaveChanges();
+            if (
+                ! String.IsNullOrWhiteSpace(model.EditableProduct.Name) &&
+                ! String.IsNullOrWhiteSpace(model.EditableProduct.Description) &&
+                (IsNumeric || String.IsNullOrWhiteSpace(price))
+               )
+            {
+                product.CategoryId = model.EditableProduct.CategoryId;
 
-            return RedirectToAction("Index", new { categoryid = model.EditableProduct.CategoryId });
+                product.Name = model.EditableProduct.Name;
 
+                product.Description = model.EditableProduct.Description;
+
+                product.Price = model.EditableProduct.Price;
+
+                _context.SaveChanges();
+
+                return RedirectToAction("Index", new { categoryid = model.EditableProduct.CategoryId });
+            }
+
+            return RedirectToAction("Edit", "Product");
         }
 
 
@@ -114,9 +134,7 @@ namespace ASPNET_MVC.Controllers
                     return RedirectToAction("Index", new { categoryid = _categoryId});
                 }
 
-                {
-                    return View(model);
-                }
+                return View(model);
         }
     }
 }

@@ -5,6 +5,7 @@
     Layout = "_Layout";
 }
 
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -23,9 +24,11 @@
             <div class="form-group">
                 <label asp-for="@Model.EditableProduct.Category.Name" class="control-label"></label>
                 @*<select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>*@
+
                 @Html.DropDownListFor(x => x.EditableProduct.CategoryId, Model.Categories)
+                
                 @*<label asp-for="CategoryId" class="control-label"></label>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>*@
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.EditableProduct.Price" class="control-label"></label>
@@ -41,8 +44,6 @@
 
 <div>
     <a href="@Url.Action("Index","Product",new{categoryId = Model.EditableProduct.CategoryId})" class="btn btn-default">Powrót do listy</a>
-    @*<a href="@Url.Action("ProductsIndex","Products",new{categoryId = Model.EditableProduct.CategoryId})" class="btn btn-default">Powrót do listy</a>*@
-    
 </div>
 
 

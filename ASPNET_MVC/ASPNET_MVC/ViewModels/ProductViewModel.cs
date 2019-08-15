@@ -12,19 +12,11 @@ namespace ASPNET_MVC.ViewModels
     {
         public ProductViewModel()
         {
-            EditableProduct = new Product
-            {
-                Id = EditableProduct.Id,
-                Name = EditableProduct.Name,
-                Description = EditableProduct.Description,
-                Price = EditableProduct.Price,
-                CategoryId = EditableProduct.CategoryId
-            };
+            EditableProduct = new Product();
         }
 
         public List<SelectListItem> Categories { get; set; }
         public Product EditableProduct { get; set; }
         public ICollection<Product> Products { get; set; }
-
     }
 }
