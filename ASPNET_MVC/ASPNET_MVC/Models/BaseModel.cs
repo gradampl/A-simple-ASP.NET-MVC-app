@@ -10,7 +10,6 @@ namespace ASPNET_MVC.Models
     {
         // public int Id { get; set; }
 
-        [Required(ErrorMessage ="This field is required.")]
         public string Name { get; set; }
     }
 }

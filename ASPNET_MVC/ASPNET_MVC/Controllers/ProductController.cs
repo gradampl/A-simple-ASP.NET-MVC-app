@@ -42,7 +42,7 @@ namespace ASPNET_MVC.Controllers
         public ActionResult Edit(int? id)
         {
             var model = new ProductViewModel();
-            model.Categories = _context.Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.CategoryId.ToString() }).ToList();
+            model.Categories = _context.Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
 
             // check if product exists
             model.EditableProduct = id.HasValue ? _context.Product.Find(id.Value) : new Product();
@@ -56,8 +56,10 @@ namespace ASPNET_MVC.Controllers
         {
             // check validation
             Product product;
+
             if (model.EditableProduct.Id > 0)
                 product = _context.Product.Find(model.EditableProduct.Id);
+
             else
             {
                 product = new Product();
@@ -75,7 +77,7 @@ namespace ASPNET_MVC.Controllers
             // add try/catch 
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Product", _context.Category.Find(model.EditableProduct.CategoryId));
+            return RedirectToAction("Index", new { categoryid = model.EditableProduct.CategoryId });
 
         }
 
@@ -84,7 +86,7 @@ namespace ASPNET_MVC.Controllers
         public ActionResult Delete(int? id)
         {
             var model = new ProductViewModel();
-            model.Categories = _context.Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.CategoryId.ToString() }).ToList();
+            model.Categories = _context.Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
 
             // check if product exists
             model.EditableProduct = id.HasValue ? _context.Product.Find(id.Value) : new Product();

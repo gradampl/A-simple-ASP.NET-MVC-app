@@ -28,7 +28,7 @@ namespace ASPNET_MVC.Models
                         new Product {Description = "niepasteryzowane, swieze", Name = "mleko",CategoryId = 1}
                     },
 
-                    CategoryId = 1
+                    Id = 1
                 },
 
 
@@ -40,7 +40,7 @@ namespace ASPNET_MVC.Models
                         new Product {Description = "kompaktowa, ladowana od gory", Name = "pralka",CategoryId = 2}
                     },
 
-                    CategoryId = 2
+                    Id = 2
                 }
 
             };
