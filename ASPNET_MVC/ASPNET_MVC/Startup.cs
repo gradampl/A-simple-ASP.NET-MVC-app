@@ -47,6 +47,8 @@ namespace ASPNET_MVC
                     options.UseSqlServer(Configuration.GetConnectionString("ASPNET_MVCContext")));
 
             services.AddScoped<ICategoryVmService, CategoryVmService>();
+
+            services.AddScoped<IProductVmService, ProductVmService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

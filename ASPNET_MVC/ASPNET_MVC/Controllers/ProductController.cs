@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNET_MVC.Models;
+using ASPNET_MVC.Services.Interfaces;
 using ASPNET_MVC.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,126 +17,75 @@ namespace ASPNET_MVC.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ASPNET_MVCContext _context;
+        private readonly IProductVmService _productVmService;
 
-        public ProductController(ASPNET_MVCContext context)
+        public ProductController(IProductVmService productVmService)
         {
-            _context = context;
+            _productVmService = productVmService;
         }
 
 
 
         public IActionResult Index(int categoryId)
         {
-
-            var products = _context.Product.Include(p => p.Category)
-                .Where(p => p.CategoryId == categoryId).ToList();
-
-            var model = new ProductViewModel()
-            {
-                Products = products
-            };
-
-            return View(model);
+            return View(_productVmService.GetAllProducts(categoryId));
         }
+
 
 
         // GET: Product/Edit/5
         public ActionResult Edit(int? id)
         {
-            var model = new ProductViewModel();
-            model.Categories = _context.Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
-
-            // check if product exists
-            model.EditableProduct = id.HasValue ? _context.Product.Find(id.Value) : new Product();
-
-            return View(model);
+            return View(_productVmService.GetProduct(id));
         }
 
         // POST: Product/Edit/5
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(ProductViewModel model)
         {
-            // check validation
-            Product product;
-
-            if (model.EditableProduct.Id > 0)
-            {
-                product = _context.Product.Find(model.EditableProduct.Id);
-                int catID = model.EditableProduct.CategoryId;
-
-            }
-                
-            else
-            {
-                product = new Product();
-                _context.Product.Add(product);
-            }
+            var product = _productVmService.FindOrMakeProduct(model);
 
             string price = model.EditableProduct.Price.ToString();
-
             decimal myDec;
-
             bool IsNumeric = decimal.TryParse(price, out myDec);
+            
+                         //Validation
+            if (ModelState.IsValid &&
+             (IsNumeric || String.IsNullOrWhiteSpace(price))
+            )
 
-
-            if (
-                ModelState.IsValid &&
-                //! String.IsNullOrWhiteSpace(model.EditableProduct.Name) &&
-                //! String.IsNullOrWhiteSpace(model.EditableProduct.Description) &&
-                (IsNumeric || String.IsNullOrWhiteSpace(price))
-               )
             {
-                product.CategoryId = model.EditableProduct.CategoryId;
+                _productVmService.EditProduct(product, model);
 
-                product.Name = model.EditableProduct.Name;
-
-                product.Description = model.EditableProduct.Description;
-
-                product.Price = model.EditableProduct.Price;
-
-                _context.SaveChanges();
-
-                return RedirectToAction("Index", new { categoryid = model.EditableProduct.CategoryId });
+                return RedirectToAction("Index", new {categoryid = model.EditableProduct.CategoryId});
             }
 
             return RedirectToAction("Edit", "Product");
         }
 
 
+
         // GET: Product/Delete/5
         public ActionResult Delete(int? id)
         {
-            var model = new ProductViewModel();
-            model.Categories = _context.Category.Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
-
-            // check if product exists
-            model.EditableProduct = id.HasValue ? _context.Product.Find(id.Value) : new Product();
-
-            return View(model);
+            return View(_productVmService.GetProduct(id));
         }
+
 
         // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(ProductViewModel model)
         {
-            Product product;
+            var product = _productVmService.FindOrMakeProduct(model);
 
-            if (model.EditableProduct.Id > 0)
-                {
-                    product = _context.Product.Find(model.EditableProduct.Id);
+            int _categoryId = product.CategoryId;
 
-                    int _categoryId = product.CategoryId;
+            _productVmService.DeleteProduct(product);
 
-                    _context.Product.Remove(product);
+            return RedirectToAction("Index", new {categoryid = _categoryId});
 
-                    _context.SaveChanges();
 
-                    return RedirectToAction("Index", new { categoryid = _categoryId});
-                }
-
-                return View(model);
         }
     }
 }

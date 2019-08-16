@@ -13,17 +13,17 @@ namespace ASPNET_MVC.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryVmService _categoryService;
+        private readonly ICategoryVmService _categoryVmService;
 
-        public CategoryController(ICategoryVmService categoryService)
+        public CategoryController(ICategoryVmService categoryVmService)
         {
-            _categoryService = categoryService;
+            _categoryVmService = categoryVmService;
         }
 
 
         public IActionResult Index()
         {
-            var result = _categoryService.GetAllCategories();
+            var result = _categoryVmService.GetAllCategories();
 
             return View(result);
         }
