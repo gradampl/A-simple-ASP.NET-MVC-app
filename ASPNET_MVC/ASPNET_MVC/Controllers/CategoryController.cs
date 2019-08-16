@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNET_MVC.Models;
+using ASPNET_MVC.Services;
+using ASPNET_MVC.Services.Interfaces;
 using ASPNET_MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,24 +13,20 @@ namespace ASPNET_MVC.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ASPNET_MVCContext _context;
+        private readonly ICategoryVmService _categoryService;
 
-        public CategoryController(ASPNET_MVCContext context)
+        public CategoryController(ICategoryVmService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
         }
+
 
         public IActionResult Index()
         {
-            
-            var categories = _context.Category.ToList();
+            var result = _categoryService.GetAllCategories();
 
-            var model = new CategoryViewModel()
-            {
-                Categories = categories
-            };
-
-            return View(model);
+            return View(result);
         }
     }
 }
+

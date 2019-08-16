@@ -1,5 +1,4 @@
 ﻿@model ASPNET_MVC.ViewModels.ProductViewModel
-
 @{
     ViewBag.Title = "Edit";
     Layout = "_Layout";
@@ -8,17 +7,21 @@
 
 <div class="row">
     <div class="col-md-4">
+        @Html.TextBoxFor(m => m.EditableProduct.Name)
+        @Html.ValidationMessageFor(m => m.EditableProduct.Name)
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="@Model.EditableProduct.Id" />
+            <input type="hidden" asp-for="@Model.EditableProduct.Id"/>
             <div class="form-group">
                 <label asp-for="@Model.EditableProduct.Name" class="control-label"></label>
-                <input asp-for="@Model.EditableProduct.Name" class="form-control" />
+                <input asp-for="@Model.EditableProduct.Name" class="form-control"/>
+                <span asp-validation-for="@Model.EditableProduct.Name"></span>
+
                 <span asp-validation-for="@Model.EditableProduct.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.EditableProduct.Description" class="control-label"></label>
-                <input asp-for="@Model.EditableProduct.Description" class="form-control" />
+                <input asp-for="@Model.EditableProduct.Description" class="form-control"/>
                 <span asp-validation-for="@Model.EditableProduct.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -26,17 +29,17 @@
                 @*<select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>*@
 
                 @Html.DropDownListFor(x => x.EditableProduct.CategoryId, Model.Categories)
-                
+
                 @*<label asp-for="CategoryId" class="control-label"></label>
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>*@
+                <span asp-validation-for="CategoryId" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.EditableProduct.Price" class="control-label"></label>
-                <input asp-for="@Model.EditableProduct.Price" class="form-control" />
+                <input asp-for="@Model.EditableProduct.Price" class="form-control"/>
                 <span asp-validation-for="@Model.EditableProduct.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>

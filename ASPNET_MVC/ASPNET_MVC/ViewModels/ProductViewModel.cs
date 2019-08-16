@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNET_MVC.Models;
+using ASPNET_MVC.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ASPNET_MVC.ViewModels
@@ -14,6 +15,7 @@ namespace ASPNET_MVC.ViewModels
         {
             EditableProduct = new Product();
         }
+
 
         public List<SelectListItem> Categories { get; set; }
         public Product EditableProduct { get; set; }

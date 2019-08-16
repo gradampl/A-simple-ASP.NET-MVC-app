@@ -80,8 +80,9 @@ namespace ASPNET_MVC.Controllers
 
 
             if (
-                ! String.IsNullOrWhiteSpace(model.EditableProduct.Name) &&
-                ! String.IsNullOrWhiteSpace(model.EditableProduct.Description) &&
+                ModelState.IsValid &&
+                //! String.IsNullOrWhiteSpace(model.EditableProduct.Name) &&
+                //! String.IsNullOrWhiteSpace(model.EditableProduct.Description) &&
                 (IsNumeric || String.IsNullOrWhiteSpace(price))
                )
             {

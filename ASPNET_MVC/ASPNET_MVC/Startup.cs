@@ -11,6 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using ASPNET_MVC.Models;
+using ASPNET_MVC.Services;
+using ASPNET_MVC.Services.Interfaces;
+using ASPNET_MVC.ViewModels;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace ASPNET_MVC
 {
@@ -34,10 +39,14 @@ namespace ASPNET_MVC
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            
+                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ProductVmValidator>());
+            
             services.AddDbContext<ASPNET_MVCContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ASPNET_MVCContext")));
+
+            services.AddScoped<ICategoryVmService, CategoryVmService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
