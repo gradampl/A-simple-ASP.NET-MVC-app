@@ -26,7 +26,7 @@ namespace ASPNET_MVC
                 try
                 {
                     var context = services.GetRequiredService<ASPNET_MVCContext>();
-                    //context.Database.EnsureCreated();
+                    context.Database.EnsureCreated();
                     //using .Data;
                     DBInitialiser.Initialise(context);
                 }

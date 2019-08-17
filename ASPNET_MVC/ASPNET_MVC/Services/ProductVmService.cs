@@ -78,7 +78,7 @@ namespace ASPNET_MVC.Services
         {
             _context.Product.Remove(product);
 
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
         }
     }
 }

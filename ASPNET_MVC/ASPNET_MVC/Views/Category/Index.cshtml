@@ -6,16 +6,47 @@
     Layout = "_Layout";
 }
 
-<div style="font-family:Arial">
-    
-    <h2>Category List</h2>
-    <ul>
-        @foreach (var item in Model.Categories)
 
-        {
-          <li>
-                <a href="@Url.Action("Index","Product",new{categoryId = item.Id})" class="btn btn-default" >@item.Name</a>
-          </li>
-        }
-    </ul>
-</div>
+                        <div class="top-buffer"></div>
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="panel-heading panel-head", style="position:relative;
+                                      z-index: 2;
+                                      top: 0;
+                                      /*margin-bottom: 20px;*/
+                                      vertical-align: middle;
+                                      border-top: 2px solid red;
+                                      border-left: 2px solid red;
+                                      border-right: 2px solid red;
+                                      width: 100%;
+                                      background-color: darkolivegreen;
+                                      padding: 20px 0;
+                                      text-align: center;
+                                      color: rgb(255,255,255);
+                                      text-shadow: 2px 2px 1px rgba(255,255,255,.5);
+                                      font: normal 26px Georgia, sans-serif; /* 'League Gothic',  */
+                                      letter-spacing: 2px;"><h4>Lista kategorii produktów</h4></div>   
+                                
+                                <div class="top-buffer"></div>
+                                <table class="table table-bordered table-striped table-condensed", style="border: 2px solid red;">
+                                    <thead>
+                                        <tr>
+                                            <th>NAZWA KATEGORII</th>
+                                            <th>OPCJA</th>
+                                        </tr>
+                                    </thead,>
+                                    <tbody>
+                                        @foreach (var item in Model.Categories)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                                
+                                                <td>
+                                                    <a href="@Url.Action("Index", "Product", new {categoryId = item.Id})" class="btn btn-info">Zobacz produkty</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
