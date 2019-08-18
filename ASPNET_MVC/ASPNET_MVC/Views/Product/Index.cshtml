@@ -5,25 +5,75 @@
     Layout = "_Layout";
 }
 
-<h3>Lista produktów</a></h3>
+<div class="row">
+<h3>Lista produktów</h3>
+</div>
+ <div class="row">   
+    <p>
+        <a href="@Url.Action("Edit", "Product", new {})" class="btn btn-success">Dodaj nowy</a>
+        @*<a asp-action="Edit)">Create New</a>*@
+    </p>
+</div>
 
-<p>
-    <a href="@Url.Action("Edit","Product",new{})" class="btn btn-success">Dodaj nowy</a>
-    @*<a asp-action="Edit)">Create New</a>*@
-</p>
-<table class="table">
+<div class="row">
+<table class="table table-bordered table-striped table-condensed" , style="border: 2px solid darkblue;">
+<thead>
+    <tr>
+        <th class="col-md-2" , style="background: rgb(27,45,94)">
+            <div class="caption" , style="vertical-align: middle;
+         color: white;
+         text-shadow: 2px 2px 1px rgba(255,255,255,.5); font: normal 20px Georgia, sans-serif;
+         letter-spacing: 2px;
+         /*padding: 15px 0;*/">Nazwa</div>
+        </th>
+        <th class="col-md-2" , style="background: rgb(27,45,94)">
+            <div class="napis" , style="vertical-align: middle;
+         color: white;
+        text-shadow: 2px 2px 1px rgba(255,255,255,.5);
+        font: normal 20px Georgia, sans-serif;
+        letter-spacing: 2px;">Opis</div>
+        </th>
+        <th class="col-md-2" , style="background: rgb(27,45,94)">
+            <div class="napis" , style="vertical-align: middle;
+        color: white;
+        text-shadow: 2px 2px 1px rgba(255,255,255,.5);
+        font: normal 20px Georgia, sans-serif;
+        letter-spacing: 2px;">Cena</div>
+        </th>
+        <th class="col-md-2" , style="background: rgb(27,45,94)">
+        <div class="napis" , style="vertical-align: middle;
+        color: white;
+        text-shadow: 2px 2px 1px rgba(255,255,255,.5);
+        font: normal 20px Georgia, sans-serif;
+        letter-spacing: 2px;">Kategoria</div>
+
+        <th class="col-md-2" , style="background: rgb(27,45,94)">
+        <div class="napis" , style="vertical-align: middle;
+        color: white;
+        text-shadow: 2px 2px 1px rgba(255,255,255,.5);
+        font: normal 20px Georgia, sans-serif;
+        letter-spacing: 2px;">Opcje</div>
+    
+        </tr>
+</thead>
+<tbody class="tableBody" , style="background:grey vertical-align: middle; color: black; font-size: 18px">
+
+
+
+
+@*<table class="table">
     <thead>
     <tr>
         <th>Nazwa</th>
         <th>Opis</th>
         <th>Cena</th>
         <th>Kategoria</th>
-        <th></th>
+        <th>Opcje</th>
 
         <th></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody>*@
     @foreach (var item in Model.Products) {
         <tr>
             <td>
@@ -46,3 +96,7 @@
     }
     </tbody>
 </table>
+
+<div>
+    <a asp-controller="Category" asp-action="Index" , class="btn btn-primary">Wróć do kategorii</a>
+</div>

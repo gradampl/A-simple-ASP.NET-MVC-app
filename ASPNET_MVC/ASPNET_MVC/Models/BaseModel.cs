@@ -9,7 +9,7 @@ namespace ASPNET_MVC.Models
     public class BaseModel
     {
         // public int Id { get; set; }
-
+        [Required(ErrorMessage = "To pole jest wymagane.")]
         public string Name { get; set; }
     }
 }

@@ -41,6 +41,26 @@ namespace ASPNET_MVC.Models
                     },
 
                     Id = 2
+                },
+                new Category {Name = "Zabawki", Products = new Product[]
+                    {
+                        new Product {Description = "pluszowy, jasnobrazowy", Name = "miś",CategoryId = 3},
+                        new Product {Description = "składany", Name = "samochodzik",CategoryId = 3},
+                        new Product {Description = "na baterie", Name = "robot",CategoryId = 3}
+                    },
+
+                    Id = 3
+                },
+
+
+                new Category {Name = "Dywany", Products = new Product[]
+                    {
+                        new Product {Description = "perski", Name = "Sapir",CategoryId = 4},
+                        new Product {Description = "turecki", Name = "Mehmed",CategoryId = 4},
+                        new Product {Description = "amerykański", Name = "Joe",CategoryId = 4}
+                    },
+
+                    Id = 4
                 }
 
             };

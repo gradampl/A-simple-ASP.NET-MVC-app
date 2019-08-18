@@ -13,13 +13,13 @@ namespace ASPNET_MVC.Services
         {
             RuleFor(m => m.EditableProduct.Name)
                 .NotEmpty()
-                .WithMessage("Proszę podać nazwę produktu.")
+                .WithMessage("To pole jest wymagane.")
                 .Length(1, 50)
                 .WithMessage("Nazwa nie może zawierać więcej niż 50 znaków.");
 
             RuleFor(m => m.EditableProduct.Description)
                 .NotEmpty()
-                .WithMessage("Proszę podać opis produktu")
+                .WithMessage("To pole jest wymagane.")
                 .Length(1, 150)
                 .WithMessage("Opis nie może zawierać więcej niż 150 znaków.");
         }

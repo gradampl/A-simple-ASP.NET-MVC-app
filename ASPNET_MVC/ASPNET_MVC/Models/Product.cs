@@ -7,6 +7,7 @@ namespace ASPNET_MVC.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "To pole jest wymagane.")]
         public string Description { get; set; }
 
         public decimal? Price { get; set; }
