@@ -1,0 +1,71 @@
+﻿@model ASPNET_MVC.ViewModels.ProductViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "_Layout";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h4>Dodaj lub edytuj produkt</h4>
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.EditableProduct.Id" />
+            <div class="form-group">
+                <label asp-for="@Model.EditableProduct.Name" class="control-label">Nazwa</label>
+                <input asp-for="@Model.EditableProduct.Name" class="form-control" />
+                <span asp-validation-for="@Model.EditableProduct.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="@Model.EditableProduct.Description" class="control-label">Opis</label>
+                <input asp-for="@Model.EditableProduct.Description" class="form-control" />
+                <span asp-validation-for="@Model.EditableProduct.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.EditableProduct.Category" class="control-label">WYBIERZ KATEGORIĘ:</label>
+                @*<select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>*@
+
+                @Html.DropDownListFor(x => x.EditableProduct.CategoryId, Model.Categories)
+
+                @*<label asp-for="CategoryId" class="control-label"></label>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.EditableProduct.Price" class="control-label">Cena</label>
+                <input asp-for="@Model.EditableProduct.Price" class="form-control" />
+                <span asp-validation-for="@Model.EditableProduct.Price" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="submit" value="ZAPISZ" class="btn btn-success" />
+                    </div>
+
+                </div>
+                @if (Model.EditableProduct.CategoryId == 0)
+                {
+                    <div class="col-sm-6">
+                        <div>
+                            <a href="@Url.Action("Index", "Category")" class="btn btn-info">Cofnij</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-sm-6">
+                        <div>
+                            <a href="@Url.Action("Index", "Product", new {categoryId = Model.EditableProduct.CategoryId})" class="btn btn-info">Cofnij</a>
+                        </div>
+                    </div>
+                }
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
