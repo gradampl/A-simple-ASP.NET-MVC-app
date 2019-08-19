@@ -44,17 +44,28 @@
                     </div>
 
                 </div>
-
-                <div class="col-sm-6">
-                    <div>
-                        <a href="@Url.Action("Index", "Product", new {categoryId = Model.EditableProduct.CategoryId})" class="btn btn-info">Powrót do listy</a>
+                @if (Model.EditableProduct.CategoryId == 0)
+                {
+                    <div class="col-sm-6">
+                        <div>
+                            <a href="@Url.Action("Index", "Category")" class="btn btn-info">Cofnij</a>
+                        </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div class="col-sm-6">
+                        <div>
+                            <a href="@Url.Action("Index", "Product", new {categoryId = Model.EditableProduct.CategoryId})" class="btn btn-info">Cofnij</a>
+                        </div>
+                    </div>
+                }
+                
             </div>
         </form>
     </div>
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+}*@
